@@ -1,38 +1,166 @@
 from pygame import *
+
 import sys
+
+
 
 init()
 
-spider_png = image.load("spider.png")
+mixer.init()
 
-spider_png = transform.scale(spider_png, (100, 0))
+
+
+spiderman_png = image.load("spiderman.png")
+
+spiderman_png = transform.scale(spiderman_png, (300, 300))
+
+
 
 spider_font = font.Font("spiderfont.ttf", 50)
 
-mixer.music.load("spiderman-web-sound-effect.mp3")
+
+
+texto = spider_font.render("Casa do Miranha", True, (0, 0, 0))
+
+
+
+
+
+mixer.music.load("TASM2Theme.mp3")
+
 mixer.music.play(-1)
+
+
+
+
 
 window = display.set_mode((1200, 720))
 
-window.fill((0, 0, 0))
+display.set_caption("Atividade 5 - Homem-Aranha")
+
+
+
+# Variáveis da nuvem (EXTRA)
+
+nuvem_x = 800
+
+nuvem_y = 100
+
+velocidade_nuvem = 3
+
+
+
+relogio = time.Clock()
+
+
+
+# loop principal
 
 while True:
+
     for ev in event.get():
+
         if ev.type == QUIT:
+
             quit()
+
             sys.exit()
-        
-    #DESENHAR A PARTIR DAQUI
+
+           
+
+   
+
+    # Movimento da nuvem
+
+    nuvem_x += velocidade_nuvem
+
+    if nuvem_x > 1300: 
+
+        nuvem_x = -150 
+       
+
+   
+
+    # Fundo 
+
+    window.fill((135, 206, 235))
 
 
-    draw.rect(window, (255, 0, 0), (200, 200, 200, 200), 0)
-    draw.circle(window, (20, 50, 20), (500, 600), 200)
-    draw.polygon(window, (0, 255, 0), ((200, 300), (250, 150), (300, 300)))
-    draw.line(window, (255,0, 0), (100, 100), (200, 200), 3)
 
-    #DESENHAR IMAGEM
-    window.blit(spider_png, (-50, 0))
+    # Grama 
+
+    draw.rect(window, (100, 150, 50), (0, 550, 1200, 170))
+
+
+
+    # Sol
+
+    draw.circle(window, (255, 255, 0), (150, 150), 50)
+
+    draw.line(window, (255, 255, 0), (150, 80), (150, 50), 5)
+
+    draw.line(window, (255, 255, 0), (150, 220), (150, 250), 5)
+
+    draw.line(window, (255, 255, 0), (80, 150), (50, 150), 5)
+
+    draw.line(window, (255, 255, 0), (220, 150), (250, 150), 5)
+
+    draw.line(window, (255, 255, 0), (100, 100), (75, 75), 5)
+
+    draw.line(window, (255, 255, 0), (200, 200), (225, 225), 5)
+
+    draw.line(window, (255, 255, 0), (100, 200), (75, 225), 5)
+
+    draw.line(window, (255, 255, 0), (200, 100), (225, 75), 5)
+
+
+
+    # Casa 
+
+    draw.rect(window, (105, 105, 105), (450, 350, 200, 200))
+
+    draw.polygon(window, (210, 105, 30), [(450, 350), (550, 200), (650, 350)]) 
+
+    draw.rect(window, (139, 69, 19), (560, 430, 60, 120)) 
+
+    draw.circle(window, (0, 0, 0), (610, 490), 5) 
+
+    draw.rect(window, (0, 0, 128), (480, 430, 60, 60)) 
+
+
+    # Árvore
+
+    draw.rect(window, (101, 67, 33), (830, 450, 40, 100)) 
+
+    draw.circle(window, (34, 139, 34), (850, 400), 70) 
+
+
+
+    # Nuvem Animada
+
+    draw.circle(window, (255, 255, 255), (nuvem_x, nuvem_y), 30)
+
+    draw.circle(window, (255, 255, 255), (nuvem_x + 30, nuvem_y - 15), 40)
+
+    draw.circle(window, (255, 255, 255), (nuvem_x + 70, nuvem_y), 35)
+
+    draw.circle(window, (255, 255, 255), (nuvem_x + 40, nuvem_y + 15), 30)
+
+
+
+  
+
+    # miranha
+
+    window.blit(spiderman_png, (50, 310)) 
+   
+
+    # texto
+
+    window.blit(texto, (400, 50))
 
 
 
     display.update()
+
+    relogio.tick(60) 
