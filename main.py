@@ -36,7 +36,7 @@ mixer.music.play(-1)
 
 window = display.set_mode((1200, 720))
 
-display.set_caption("Atividade 5 - Homem-Aranha")
+
 
 
 
